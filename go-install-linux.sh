@@ -13,7 +13,7 @@ get_go_latest_version() {
     head -n 1 versions.json
 }
 
-download_go_tarball() {
+install_go() {
     arch=$(uname -m)
     version=$GO_VERSION
     if [ -z $version ]; then
@@ -43,11 +43,11 @@ download_go_tarball() {
     echo "The file for your architecture ($arch) is: $file"
     rm -f $file
     wget $GO_WEBSITE_DOWNLOAD$file
+    rm -rf /usr/local/go
+    tar -C /usr/local -xzf $version.linux-amd64.tar.gz
 }
 
-download_go_tarball
-rm -rf /usr/local/go
-tar -C /usr/local -xzf go1.22.3.linux-amd64.tar.gz
+install_go
 
 # For all users, export go to PATH if not present in .bashrc
 NEW_PATH='export PATH=$PATH:/usr/local/go/bin'
