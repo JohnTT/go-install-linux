@@ -52,7 +52,7 @@ install_go() {
 install_go
 
 # For all users, export go to PATH if not present in .bashrc
-NEW_PATH='export PATH=$PATH:/usr/local/go/bin'
+NEW_PATH='export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin'
 update_bashrc() {
     local file="$1/.bashrc"
     if [ -f "$file" ]; then
