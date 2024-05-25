@@ -9,8 +9,9 @@ GO_WEBSITE_DOWNLOAD='https://go.dev/dl/'
 GO_VERSION=$1
 
 get_go_latest_version() {
-    curl -s $GO_WEBSITE_DOWNLOAD?mode=json | jq -r .[].version | sort -r > versions.json
-    head -n 1 versions.json
+    curl -s $GO_WEBSITE_DOWNLOAD?mode=json | jq -r .[].version | sort -r > /tmp/versions.json
+    head -n 1 /tmp/versions.json
+    rm /tmp/versions.json
 }
 
 install_go() {
@@ -41,10 +42,11 @@ install_go() {
     esac
 
     echo "The file for your architecture ($arch) is: $file"
-    rm -f $file
-    wget $GO_WEBSITE_DOWNLOAD$file
+    rm -f /tmp/$file
+    wget $GO_WEBSITE_DOWNLOAD$file -P /tmp/
     rm -rf /usr/local/go
-    tar -C /usr/local -xzf $version.linux-amd64.tar.gz
+    tar -C /usr/local -xzf /tmp/$version.linux-amd64.tar.gz
+    rm -rf /tmp/$version.linux-amd64.tar.gz
 }
 
 install_go
