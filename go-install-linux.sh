@@ -5,6 +5,12 @@
 # Example usage:
 # sudo ./go-install-linux.sh $VERSION
 
+set -e
+if [ "$(whoami)" != "root" ]; then
+    echo "Must run script as root user, exiting"
+    exit 1
+fi
+
 GO_WEBSITE_DOWNLOAD='https://go.dev/dl/'
 GO_VERSION=$1
 
