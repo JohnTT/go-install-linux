@@ -58,6 +58,7 @@ update_bashrc() {
     if [ -f "$file" ]; then
         # Check if the line already exists to avoid duplicates
         grep -qxF "$NEW_PATH" "$file" || echo "$NEW_PATH" >> "$file"
+        echo "Updaing $file with $NEW_PATH"
     fi
 }
 
