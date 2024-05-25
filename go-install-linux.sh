@@ -74,4 +74,7 @@ while IFS=: read -r username _ uid _ _ home _; do
         update_bashrc "$home"
     fi
 done < /etc/passwd
+
 source ~/.bashrc
+go version
+echo "Remember to run 'source ~/.bashrc' after this script is done."
